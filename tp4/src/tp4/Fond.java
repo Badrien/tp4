@@ -31,4 +31,9 @@ public class Fond {
     {
         this.amount = a;
     }
+    
+    public double getAmount()
+    {
+        return this.amount;
+    }
 }

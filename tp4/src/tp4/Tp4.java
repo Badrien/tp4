@@ -29,6 +29,9 @@ public class Tp4 {
         Portefeuille port = new Portefeuille();
         //Scanner to get the data from users
         Scanner sc = new Scanner(System.in);
+        
+        //Display object
+        Display show = new Display(port);
     
         //Test of the method addFond
         
@@ -86,6 +89,13 @@ public class Tp4 {
         inst.sortFonds();
         //Display the new ordered Fond objects list
         inst.display();
+        
+        port.addInstrument("9", f4);
+        port.addInstrument("52", f3);
+        port.addInstrument("52", f2);
+        port.addInstrument("52", f1);
+        show.displayInstruments();
+        show.displayFonds("52");
     
     }
     

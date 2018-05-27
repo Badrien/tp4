@@ -15,7 +15,7 @@ import java.util.Comparator;
 public class Instrument {
     
     public ArrayList<Fond> list;
-    private String key;
+    public String key;
     
     
     /**

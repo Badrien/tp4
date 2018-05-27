@@ -12,7 +12,7 @@ package tp4;
 public class Fond implements Comparable<Fond> {
     
     private double amount;
-    private String key;
+    public String key;
     
     
     /**

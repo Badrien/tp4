@@ -6,6 +6,7 @@
 package tp4;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  *
@@ -13,7 +14,8 @@ import java.util.ArrayList;
  */
 public class Instrument {
     
-    ArrayList<Fond> list;
+    public ArrayList<Fond> list;
+    private String key;
     
     
     /**
@@ -21,7 +23,7 @@ public class Instrument {
      */
     public Instrument()
     {
-        this.list = null;
+        this.list = new ArrayList<>();
     }
     
     public Instrument(ArrayList<Fond> i)
@@ -34,6 +36,30 @@ public class Instrument {
         this.list.add(f);
     }
     
+    public class FondComparator implements Comparator<Fond>
+    {
+        @Override
+        public int compare(Fond o1, Fond o2) {
+            return o1.compareTo(o2);
+        }
+        
+    }
     
+    /**
+     * Method that sort the array of funds composing an instrument 
+     */
+    public void sortFonds()
+    {
+        this.list.sort(new FondComparator());
+    }
+    
+    
+    public void display()
+    {
+        for(int i = 0; i < this.list.size(); i++)
+        {
+            System.out.println(this.list.get(i).getAmount());
+        }
+    }
     
 }

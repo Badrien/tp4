@@ -9,9 +9,10 @@ package tp4;
  *
  * @author adrie
  */
-public class Fond {
+public class Fond implements Comparable<Fond> {
     
     private double amount;
+    private String key;
     
     
     /**
@@ -35,5 +36,22 @@ public class Fond {
     public double getAmount()
     {
         return this.amount;
+    }
+    
+    
+    public boolean equals(Fond f)
+    {
+        return f.getAmount() == this.amount;
+    }
+
+    @Override
+    public int compareTo(Fond o) 
+    {
+        if(this.amount > o.getAmount())
+            return 1;
+        else if(this.equals(o))
+            return 0;
+        else
+            return -1;
     }
 }

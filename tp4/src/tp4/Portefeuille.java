@@ -6,7 +6,9 @@
 package tp4;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Map;
+
 
 /**
  *
@@ -23,8 +25,8 @@ public class Portefeuille {
      */
     public Portefeuille()
     {
-        this.mapFonds = null;
-        this.mapInstruments = null;
+        this.mapFonds = new Hashtable();
+        this.mapInstruments = new Hashtable();
     }
     
     public double searchFond(String k) throws FondsInexistant
@@ -52,38 +54,76 @@ public class Portefeuille {
    }
     
     
-    public void addFond(String k, double a) throws FondsExistant
+    public void addFond(String k, double a) throws FondsExistant 
     {
-        
-        if(this.mapFonds.containsKey(k))
-        {
-            throw new FondsExistant();
+        try{
+            this.searchFond(k);
+            throw new FondsExistant(); 
         }
-        else
+        catch(FondsInexistant e)
         {
             Fond f = new Fond(a);
-            this.mapFonds.put(k, f);   
+            this.mapFonds.put(k, f);
+            System.out.println("Fond succesfully added");
         }
     }
     
-    public void addInstrument(String k, Fond f)
+    /**
+     *
+     * @param k
+     * @param f
+     * Add an instrument if it does not already exist
+     */
+    public void addInstrument(String k, Fond f) 
     {
-        if(this.mapInstruments.containsKey(k))
+        try
         {
-           this.searchInstrument(k).add(f);
+           this.searchInstrument(k);
+           
         }
-        else
+        catch(InstrumentInexistant e)
         {
-            this.mapInstruments.put(k, new Instrument());
-            this.mapInstruments.get(k).addFonds(f);
+            //Create an instrument 
+            Instrument i = new Instrument();
+            
+            //Call to the function that add funds to an instrument 
+            i.addFonds(f);
+            
+            //Add the instrument to the map of the "portefeuille"
+            this.mapInstruments.put(k, i);
         }
     }
     
     public void delFond(String k)
     {
-        if(this.mapFonds.containsKey(k))
+        try{
+            double a = this.searchFond(k);
+            this.mapFonds.remove(k, a);
+            System.out.println("The funds have been correctly deleted");
+            
+        }
+        catch(FondsInexistant e)
         {
-           this.mapFonds.remove(k);
+            e.getMessage();
+        }
+    }
+    
+    
+    public void delInstrument(String k)
+    {
+        try{
+            ArrayList<Fond> a = this.searchInstrument(k);
+            for(int i = 0; i < a.size(); i++)
+            {
+                a.remove(i);
+            }
+            this.mapInstruments.remove(k);
+            System.out.println("The instrument have been correctly deleted");
+            
+        }
+        catch(InstrumentInexistant e)
+        {
+            e.getMessage();
         }
     }
     

@@ -5,6 +5,7 @@
  */
 package tp4;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -37,8 +38,9 @@ public class Portefeuille {
     }
     
     
-    public ArrayList<Fond> rechercheInstrument(String cle) throws InstrumentInexistant
+    public ArrayList<Fond> searchInstrument(String cle) throws InstrumentInexistant
    {
+       
        if(this.mapInstruments.containsKey(cle))
        {
            return(mapInstruments.get(cle).list);
@@ -66,7 +68,23 @@ public class Portefeuille {
     
     public void addInstrument(String k, Fond f)
     {
-        
+        if(this.mapInstruments.containsKey(k))
+        {
+           this.searchInstrument(k).add(f);
+        }
+        else
+        {
+            this.mapInstruments.put(k, new Instrument());
+            this.mapInstruments.get(k).addFonds(f);
+        }
+    }
+    
+    public void delFond(String k)
+    {
+        if(this.mapFonds.containsKey(k))
+        {
+           this.mapFonds.remove(k);
+        }
     }
     
     
